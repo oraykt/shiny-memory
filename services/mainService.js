@@ -37,7 +37,7 @@ const mainService = {
         movie: movie._id
       }).save()
       await movie.Comments.push(newComment._id)
-      await movie.save()
+      return movie.save()
     } else {
       throw { status: 406, message: `${imdbID} is not found!` }
     }
