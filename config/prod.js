@@ -1,5 +1,5 @@
 module.exports = {
-  mongoURI: process.env.mongoURI,
+  mongoURI: process.env.MongoURI,
   apikey: process.env.apikey,
   omdbUrl: process.env.omdbUrl
-}
+};

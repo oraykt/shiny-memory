@@ -2,8 +2,7 @@ const mongoose = require('mongoose')
 
 module.exports = () => {
   mongoose.connect(require('../config/key').mongoURI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
+    useNewUrlParser: true
   })
   mongoose.set('useCreateIndex', true)
   mongoose.set('useFindAndModify', false)
@@ -16,5 +15,4 @@ module.exports = () => {
   })
 
   mongoose.Promise = global.Promise
-  // eslint-disable-next-line semi
-};
+}
