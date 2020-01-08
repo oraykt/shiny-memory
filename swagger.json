@@ -1,0 +1,235 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "v1",
+    "title": "Shiny-Memory",
+    "description": "It's a demo app",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "oraykt-shiny-memory.herokuapp.com",
+  "basePath": "/api/v1/movieService",
+  "tags": [{
+    "name": "Shiny-Memory",
+    "description": "NetGuru Assignment"
+  }],
+  "schemes": ["https", "http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/movies": {
+      "get": {
+        "tags": ["Movie"],
+        "description": "list of all movies already present in application database.",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Movie"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Movie"],
+        "description": "Based on passed data, other movie details should be fetched from http://www.omdbapi.com/ (or other similar, public movie database) - and saved to application database.",
+        "parameters": [{
+          "in": "query",
+          "name": "imdbID",
+          "required": true,
+          "description": "Valid an Imdb id!"
+        }],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Movie"
+            }
+          },
+          "406": {
+            "description": "imdbID not found!",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/comments": {
+      "get": {
+        "tags": ["Comment"],
+        "description": "list of all comments present in application database.",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Comments"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Comment"],
+        "description": "save a comment into application database",
+        "parameters": [{
+          "in": "query",
+          "name": "imdbID",
+          "required": true,
+          "description": "Valid an Imdb id!"
+        }, {
+          "in": "query",
+          "name": "comment",
+          "required": true,
+          "description": "Type your idea about the Movie"
+        }],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Comments"
+            }
+          },
+          "406": {
+            "description": "imdbID not found!",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Movie": {
+      "properties": {
+        "Comments": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "_id": {
+                "type": "string"
+              },
+              "comment": {
+                "type": "string"
+              },
+              "movie": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "_id": {
+          "type": "string"
+        },
+        "Title": {
+          "type": "string"
+        },
+        "Year": {
+          "type": "string"
+        },
+        "Genre": {
+          "type": "string"
+        },
+        "Director": {
+          "type": "string"
+        },
+        "Writer": {
+          "type": "string"
+        },
+        "Actors": {
+          "type": "string"
+        },
+        "Plot": {
+          "type": "string"
+        },
+        "imdbRating": {
+          "type": "string"
+        },
+        "imdbVotes": {
+          "type": "string"
+        },
+        "imdbID": {
+          "type": "string"
+        }
+      }
+    },
+    "Comments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string"
+          },
+          "comment": {
+            "type": "string"
+          },
+          "movie": {
+            "type": "object",
+            "properties": {
+              "_id": {
+                "type": "string"
+              },
+              "Title": {
+                "type": "string"
+              },
+              "Year": {
+                "type": "string"
+              },
+              "Genre": {
+                "type": "string"
+              },
+              "Director": {
+                "type": "string"
+              },
+              "Writer": {
+                "type": "string"
+              },
+              "Actors": {
+                "type": "string"
+              },
+              "Plot": {
+                "type": "string"
+              },
+              "imdbRating": {
+                "type": "string"
+              },
+              "imdbVotes": {
+                "type": "string"
+              },
+              "imdbID": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "Error": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
