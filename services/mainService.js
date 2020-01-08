@@ -4,29 +4,46 @@ const Comment = require('../models/Comment')
 const omdb = require('./omdb')
 const mainService = {
   postMovie: async params => {
-    // TODO seperate title and imdbId
-    const { title, imdbID } = params
-    // const movie = await Movie.findOne({ title, imdbID })
-    // TODO movie not exist
-    const movie = await Movie.findOne({ Title: title })
+    // TODO Title
+    const { Title, imdbID } = params
+    const movie = await Movie.findOne({ imdbID })
     if (movie) {
-      throw { status: 204, message: `${title} is exist!` }
+      throw { status: 406, message: 'The Movie is exist!' }
     }
-    return omdb
-      .getMovie(params)
-      .then(async movie => {
-        return new Movie(JSON.parse(movie)).save()
-      })
-      .catch(err => {
-        throw err
-      })
+    return omdb.getMovie(params).then(async data => {
+      const movie = JSON.parse(data)
+      if (movie.Response == 'True') {
+        return new Movie(movie).save()
+      } else {
+        console.error('Client tried to post unknown movie!')
+        // TODO
+        // when the user wants to upload an unknown movie then
+        // the server should ask for more information about the movie
+        // right over there!
+        throw { status: 406, message: `${imdbID} is not found!` }
+      }
+    })
   },
   listMovies: async () => {
-    return Movie.find()
+    return Movie.find({}).populate('Comments')
   },
-  postComment: params => {
-    const { title, comment } = params
-    Movie.findOne({ title })
+  postComment: async params => {
+    const { imdbID, comment } = params
+    const movie = await Movie.findOne({ imdbID })
+    if (movie) {
+      // TODO authentication
+      const newComment = await new Comment({
+        comment,
+        movie: movie._id
+      }).save()
+      await movie.Comments.push(newComment._id)
+      await movie.save()
+    } else {
+      throw { status: 406, message: `${imdbID} is not found!` }
+    }
+  },
+  listComments: async () => {
+    return Comment.find({}).populate('movie')
   }
 }
 module.exports = mainService

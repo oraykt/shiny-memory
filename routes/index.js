@@ -28,8 +28,26 @@ router.post('/movies', (req, res) => {
     })
 })
 
-router.get('/comments', (req, res) => {})
+router.get('/comments', (req, res) => {
+  mainService
+    .listComments()
+    .then(comments => {
+      res.status(200).json(comments)
+    })
+    .catch(err => {
+      res.status(err.status ? err.status : 500).json({ message: err.message })
+    })
+})
 
-router.post('/comments', (req, res) => {})
+router.post('/comments', (req, res) => {
+  mainService
+    .postComment(req.query)
+    .then(data => {
+      res.status(200).json(data)
+    })
+    .catch(err => {
+      res.status(err.status ? err.status : 500).json({ message: err.message })
+    })
+})
 
 module.exports = router

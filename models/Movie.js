@@ -3,7 +3,6 @@ const { Schema } = mongoose
 const movieSchema = new Schema(
   {
     Title: {
-      required: true,
       type: String
     },
     Year: {
@@ -31,7 +30,8 @@ const movieSchema = new Schema(
       type: String
     },
     imdbID: {
-      type: String
+      type: String,
+      required: true
     },
     Comments: [
       {
