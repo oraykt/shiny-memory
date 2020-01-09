@@ -5,9 +5,9 @@
 
 Develop Restful API with Express and MongoDB <br />
 
-https://oraykt-shiny-memory.herokuapp.com/ 
 
-Endpoints served on <b>/api/v1/movieservice</b> <br />
+Endpoints served on <b>/api/v1/movieservice.</b> <br/>
+If you'd like to reach Swagger-Page, Please visit https://oraykt-shiny-memory.herokuapp.com/  <br />
 
 # Movies
 
@@ -33,11 +33,3 @@ Endpoints served on <b>/api/v1/movieservice</b> <br />
 - [API Tests](https://github.com/oraykt/shiny-memory/blob/master/test/test.js)
   <br/>
 - [Config](https://github.com/oraykt/shiny-memory/blob/master/config/prod.js)
-
-## Installation
-
-It doesn't have private npm repo currently so we need to clone Shiny-Memory from git repo and install it locally via 
-
-```bash
-git clone https://github.com/oraykt/shiny-memory.git && cd shiny-memory && npm install && npm start
-```
