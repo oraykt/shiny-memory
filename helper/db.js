@@ -1,18 +1,45 @@
 const mongoose = require('mongoose')
 
-module.exports = () => {
-  mongoose.connect(require('../config/key').mongoURI, {
-    useNewUrlParser: true
-  })
-  mongoose.set('useCreateIndex', true)
-  mongoose.set('useFindAndModify', false)
+const mongoURI = require('../config/key').mongoURI
 
-  mongoose.connection.on('open', () => {
-    console.log('MongoDB: Connected!')
-  })
-  mongoose.connection.on('error', error => {
-    console.log('MongoDB: Connection Failed! \n', error)
-  })
+module.exports = {
+  open: () => {
+    return new Promise((resolve, reject) => {
+      if (process.env.NODE_ENV === 'test') {
+        const Mockgoose = require('mockgoose').Mockgoose
+        const mockgoose = new Mockgoose(mongoose)
 
-  mongoose.Promise = global.Promise
+        mockgoose.prepareStorage()
+          .then(() => {
+            mongoose.connect(mongoURI,
+              {
+                useNewUrlParser: true,
+                useUnifiedTopology: true,
+                useCreateIndex: true,
+                useFindAndModify: false
+              })
+              .then((res, err) => {
+                if (err) return reject(err)
+                resolve()
+              })
+          })
+      } else {
+        mongoose.connect(mongoURI,
+          {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+            useCreateIndex: true,
+            useFindAndModify: false
+          })
+          .then((res, err) => {
+            if (err) return reject(err)
+            console.log('MongoDB is connected!')
+            resolve()
+          })
+      }
+    })
+  },
+  close: () => {
+    return mongoose.disconnect()
+  }
 }
