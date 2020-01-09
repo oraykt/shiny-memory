@@ -1,5 +1,9 @@
 ## Shiny Memory!
 
+[![Heroku](https://heroku-badge.herokuapp.com/?app=heroku-badge)](https://oraykt-shiny-memory.herokuapp.com/)
+[![Build Status](https://travis-ci.org/oraykt/shiny-memory.svg?branch=master)](https://travis-ci.org/oraykt/shiny-memory)
+
+
 Develop Restful API with Express and MongoDB <br />
 
 https://oraykt-shiny-memory.herokuapp.com/
