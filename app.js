@@ -14,7 +14,7 @@ const swaggerDocument = require('./swagger.json')
 const app = express()
 
 // db connection
-require('./helper/db.js').open()
+require('./helper/db.js')()
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'))

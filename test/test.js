@@ -5,7 +5,6 @@ const chaiHttp = require('chai-http')
 const should = chai.should()
 const server = require('../app')
 
-const db = require('../helper/db')
 const config = require('../config/key')
 chai.use(chaiHttp)
 
@@ -109,11 +108,9 @@ describe('Test Logs', () => {
     })
   })
   after(done => {
-    db.close()
-      .then(() => {
-        console.log('MongoDB connection closed')
-        done()
-      })
-      .catch((err) => done(err))
+    mongoose.disconnect().then(() => {
+      console.log('Mongoose Connection closed')
+      done()
+    })
   })
 })
