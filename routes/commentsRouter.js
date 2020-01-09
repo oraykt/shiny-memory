@@ -16,8 +16,8 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {
   mainService
     .postComment(req.query)
-    .then(data => {
-      res.status(200).json(data)
+    .then(comments => {
+      res.status(200).json(comments)
     })
     .catch(err => {
       res.status(err.status ? err.status : 500).json({ message: err.message })

@@ -18,4 +18,6 @@ describe('Test Logs', () => {
       done()
     })
   })
+
+  it('POST')
 })
