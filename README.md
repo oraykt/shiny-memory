@@ -5,7 +5,9 @@
 
 Develop Restful API with Express and MongoDB <br />
 
-https://oraykt-shiny-memory.herokuapp.com/
+https://oraykt-shiny-memory.herokuapp.com/ <br/ >
+
+Endpoints served on <b>/api/v1/movieservice</b> <br />
 
 # Movies
 
