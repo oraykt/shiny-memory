@@ -1,4 +1,4 @@
-## Shiny Memory!
+# Shiny Memory!
 
 [![Heroku](https://heroku-badge.herokuapp.com/?app=heroku-badge)](https://oraykt-shiny-memory.herokuapp.com/)
 [![Build Status](https://travis-ci.org/oraykt/shiny-memory.svg?branch=master)](https://travis-ci.org/oraykt/shiny-memory)
@@ -9,14 +9,14 @@ Develop Restful API with Express and MongoDB <br />
 Endpoints served on <b>/api/v1/movieservice.</b> <br/>
 If you'd like to reach Swagger-Page, Please visit https://oraykt-shiny-memory.herokuapp.com/  <br />
 
-# Movies
+## Movies
 
 | Route                   | HTTP Verb | RESPONSE | Description                        |
 | ----------------------- | --------- | -------- | ---------------------------------- |
 | /movies                 | `GET`     | Array    | List all movies with comments.     |
 | /movies?imdbID=[imdbID] | `POST`    | Object   | POST a new Movie into Application. |
 
-# Comments
+## Comments
 
 | Route                                         | HTTP Verb | RESPONSE | Description                     |
 | --------------------------------------------- | --------- | -------- | ------------------------------- |
@@ -24,7 +24,7 @@ If you'd like to reach Swagger-Page, Please visit https://oraykt-shiny-memory.he
 | /comments?imdbID=[imdbID]&comment=['comment'] | `POST`    | Object   | POST a comment into Application |
 
 
-# Information about Files 
+## Information about Files 
 
 - [Models](https://github.com/oraykt/shiny-memory/tree/master/models)
 - [Services](https://github.com/oraykt/shiny-memory/tree/master/services)
@@ -33,3 +33,12 @@ If you'd like to reach Swagger-Page, Please visit https://oraykt-shiny-memory.he
 - [API Tests](https://github.com/oraykt/shiny-memory/blob/master/test/test.js)
   <br/>
 - [Config](https://github.com/oraykt/shiny-memory/blob/master/config/prod.js)
+
+## Installation
+
+It doesn't have private npm repo currently so we need to clone Shiny-Memory from git repo and install it locally via 
+<b>If you'd like to build it, you need to set production env in config!</b>
+
+```bash
+git clone https://github.com/oraykt/shiny-memory.git && cd shiny-memory && npm install
+```
