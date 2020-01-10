@@ -1,5 +1,5 @@
 {
-  "name": "netguru",
+  "name": "shiny-memory",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -14,7 +14,7 @@
     "debug": "~2.6.9",
     "express": "~4.16.0",
     "http-errors": "~1.6.2",
-    "jade": "~1.11.0",
+    "pug": "^2.0.4",
     "mocha": "^7.0.0",
     "mockgoose": "^8.0.4",
     "mongoose": "^5.8.5",
